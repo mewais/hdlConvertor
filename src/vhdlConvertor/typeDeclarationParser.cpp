@@ -123,17 +123,14 @@ unique_ptr<iHdlExprItem> VhdlTypeDeclarationParser::visitComposite_type_definiti
 
 unique_ptr<iHdlExprItem> VhdlTypeDeclarationParser::visitAccess_type_definition(
 		vhdlParser::Access_type_definitionContext *ctx) {
-	NotImplementedLogger::print("TypeDeclarationParser.access_type_definition",
-			ctx);
-	return create_object<HdlExprNotImplemented>(ctx);
+	//access_type_definition: KW_ACCESS subtype_indication;
+    return VhdlTypeDeclarationParser::visitSubtype_indication(ctx->subtype_indication());
 }
 
 unique_ptr<iHdlExprItem> VhdlTypeDeclarationParser::visitFile_type_definition(
 		vhdlParser::File_type_definitionContext *ctx) {
-
-	NotImplementedLogger::print("TypeDeclarationParser.file_type_definition",
-			ctx);
-	return create_object<HdlExprNotImplemented>(ctx);;
+    //file_type_definition: KW_FILE KW_OF type_mark;
+    return VhdlExprParser::visitType_mark(ctx->type_mark());
 }
 
 unique_ptr<iHdlExprItem> VhdlTypeDeclarationParser::visitProtected_type_definition(
